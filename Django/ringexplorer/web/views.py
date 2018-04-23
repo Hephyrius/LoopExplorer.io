@@ -1,10 +1,17 @@
 from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
 from .models import ring
+from .forms import ringIndexForm
 
 def index(request):
-	return render(request, 'HomePage.html')
+	if request.method == 'GET':
+		print(request.GET)
+		
+	form = ringIndexForm()
 	
+	context={'form': form}
+	return render(request, 'HomePage.html', context)
+
 def allRings(request):
 	data = ring.objects.all()
 	print(data)

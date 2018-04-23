@@ -52,7 +52,7 @@
 							<tbody>
 								<tr class="table-active">
 									<td>
-										{{r.ringindex }}
+										<a href="http://localhost:8000/ring/?ringindex={{r.ringindex}}">{{r.ringindex }}</a>
 									</td>
 									<td>
 										{{ r.chain }}
@@ -69,8 +69,6 @@
 									<td>
 										{{ r.mineraddress }}
 									</td>
-								</tr>
-
 								</tr>
 							</tbody>
 							{% endfor %}

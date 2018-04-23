@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -32,27 +32,23 @@
 					<tbody>
 						<tr>
 						  <th>Ring Index</th>
-							<td>0</td>
+							<td>{{result.ringindex}}</td>
 						</tr>
 						<tr>
 						  <th>Ring Hash</th>
-							<td>0</td>
+							<td>{{result.ringhash}}</td>
 						</tr>
 						<tr>
 						  <th>Ring Size</th>
-							<td>0</td>
-						</tr>
-						<tr>
-						  <th>Transaction Hash</th>
-							<td>0</td>
+							<td>{{result.ringsize}}</td>
 						</tr>
 						<tr>
 						  <th>Chain</th>
-							<td>Ethereum</td>
+							<td>{{result.chain}}</td>
 						</tr>
 						<tr>
 						  <th>Block Number</th>
-							<td>0</td>
+							<td>{{result.block}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -71,9 +67,11 @@
 		  <li class="nav-item">
 			<a class="nav-link" id="order2-tab" data-toggle="tab" href="#order2" role="tab" aria-controls="order2" aria-selected="false">Order 2 Details</a>
 		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" id="order3-tab" data-toggle="tab" href="#order3" role="tab" aria-controls="order2" aria-selected="false">Order 3 Details</a>
-		  </li>
+		{% if result.ringsize == "3" %}
+			  <li class="nav-item">
+				<a class="nav-link" id="order3-tab" data-toggle="tab" href="#order3" role="tab" aria-controls="order2" aria-selected="false">Order 3 Details</a>
+			  </li>
+		{%endif%}
 		</ul>
 
 		<div class="tab-content">
@@ -85,7 +83,7 @@
 							<tbody>
 								<tr>
 								  <th>Address</th>
-									<td>0x0</td>
+									<td>{{result.mineraddress}}</td>
 								</tr>
 								<tr>
 								  <th>Total LRC Received</th>
@@ -105,27 +103,27 @@
 							<tbody>
 								<tr>
 								  <th>Order Hash</th>
-									<td>0</td>
+									<td>{{result.order1hash}}</td>
 								</tr>
 								
 								<tr>
 								  <th>Lrc Fee Total</th>
-									<td>0</td>
+									<td>{{result.order1lrcFeeState}}</td>
 								</tr>
 								
 								<tr>
-								  <th>Lrc Fee Miner</th>
-									<td>0</td>
+								  <th>Lrc Reward Miner</th>
+									<td>{{result.order1lrcReward}}</td>
 								</tr>
 								
 								<tr>
 								  <th>Split Seller</th>
-									<td>0</td>
+									<td>{{result.order1splitS}}</td>
 								</tr>
 								
 								<tr>
 								  <th>Split Buyer</th>
-									<td>0</td>
+									<td>{{result.order1splitB}}</td>
 								</tr>
 								
 							</tbody>
@@ -142,27 +140,27 @@
 							<tbody>
 								<tr>
 								  <th>Order Hash</th>
-									<td>0</td>
+									<td>{{result.order2hash}}</td>
 								</tr>
 								
 								<tr>
 								  <th>Lrc Fee Total</th>
-									<td>0</td>
+									<td>{{result.order2lrcFeeState}}</td>
 								</tr>
 								
 								<tr>
-								  <th>Lrc Fee Miner</th>
-									<td>0</td>
+								  <th>Lrc Reward Miner</th>
+									<td>{{result.order2lrcReward}}</td>
 								</tr>
 								
 								<tr>
 								  <th>Split Seller</th>
-									<td>0</td>
+									<td>{{result.order2splitS}}</td>
 								</tr>
 								
 								<tr>
 								  <th>Split Buyer</th>
-									<td>0</td>
+									<td>{{result.order2splitB}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -170,42 +168,42 @@
 				</div>
 		  </div>
 		  </div>
-		  <div class="tab-pane" id="order3" role="tabpanel" aria-labelledby="order3-tab">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover table-striped">
-							<tbody>
-								<tr>
-								  <th>Order Hash</th>
-									<td>0</td>
-								</tr>
-								
-								<tr>
-								  <th>Lrc Fee Total</th>
-									<td>0</td>
-								</tr>
-								
-								<tr>
-								  <th>Lrc Fee Miner</th>
-									<td>0</td>
-								</tr>
-								
-								<tr>
-								  <th>Split Seller</th>
-									<td>0</td>
-								</tr>
-								
-								<tr>
-								  <th>Split Buyer</th>
-									<td>0</td>
-								</tr>
-							</tbody>
-						</table>
+			  <div class="tab-pane" id="order3" role="tabpanel" aria-labelledby="order3-tab">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-hover table-striped">
+								<tbody>
+									<tr>
+									  <th>Order Hash</th>
+										<td>0</td>
+									</tr>
+									
+									<tr>
+									  <th>Lrc Fee Total</th>
+										<td>0</td>
+									</tr>
+									
+									<tr>
+									  <th>Lrc Fee Miner</th>
+										<td>0</td>
+									</tr>
+									
+									<tr>
+									  <th>Split Seller</th>
+										<td>0</td>
+									</tr>
+									
+									<tr>
+									  <th>Split Buyer</th>
+										<td>0</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</div>
 

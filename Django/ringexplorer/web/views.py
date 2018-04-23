@@ -12,4 +12,7 @@ def allRings(request):
 	return render_to_response('AllRingsPage.html', {'result':data})
 	
 def getRing(request):
-	return render(request, 'RingBasic.html')
+	query = request.GET.get('ringindex')
+	data = ring.objects.filter(ringindex = query)
+	print(data)
+	return render_to_response('RingBasic.html', {'result':data[0]})

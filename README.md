@@ -45,7 +45,7 @@ Currently data importation is a one off process, however in a live environment t
 
 ## starting the server:
 
-In order to run the application run the command in the Django/RingExplore directory
+In order to run the application run the command in the RingExplore directory
 
 python manage.py runserver Alternatively Run the StartServer.bat File in the Django Folder.
 
@@ -55,4 +55,40 @@ This will make the prototype available at : http://127.0.0.1:8000/
 http://127.0.0.1:8000/ - Homepage
 http://127.0.0.1:8000/Ring/ - Ring details
 http://127.0.0.1:8000/AllRings/ - Display All Rings in database
+
+# Misc
+
+## notes
+
+Now that the base architecture has been fleshed out, adding new features should be relatively simple.
+
+## planned features short term
+
+* Increasing the diversity of data that is shown ie, addresses of order participants, usd value of orders, token traded, market involved
+* Better navigation - Topbar/footer
+* Search functionality to work with miner addresses, ring hash, etc
+
+## Issues
+
+* data on the ring page needs to be fixed in order to be shown under the correct categories
+* Fix timestamps so they are not 0
+
+## Proposal
+
+see proposals/ directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

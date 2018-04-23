@@ -79,20 +79,31 @@ c = conn.cursor()
 c.execute("""CREATE TABLE ringdata
                  (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB)""")
 
-
 #insert the data into the db
 for i, row in stored_data.iterrows():
-    command = "INSERT INTO ringdata (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB)"
-    command = command + "values(" + str(row['ringsize']) +", " + str(row['dataset']['ringIndex']) +", "+ str(row['block']) +", "+ str(row['timestamp']) +", `Ethereum`, `" + row['dataset']['ringHash'] +"`, `" + row['dataset']['miner'] +"`, "
-    command = command + "`" + str(row['dataset']['orderHashlist'][0]) + "`, " + str(row['dataset']['intList'][2]) + ", " + str(row['dataset']['intList'][3]) + ", " + str(row['dataset']['intList'][4]) + ", " + str(row['dataset']['intList'][5]) + ", "
-    command = command + "`" + str(row['dataset']['orderHashlist'][1]) + "`, " + str(row['dataset']['intList'][8]) + ", " + str(row['dataset']['intList'][9]) + ", " + str(row['dataset']['intList'][10]) + ", " + str(row['dataset']['intList'][11]) + ", "
+    
+    params = ()
     if(row['ringsize'] == 3):
-        command = command + "`" + str(row['dataset']['orderHashlist'][2]) + "`, " + str(row['dataset']['intList'][14]) + ", " + str(row['dataset']['intList'][15]) + ", " + str(row['dataset']['intList'][16]) + ", " + str(row['dataset']['intList'][17]) + ")"
+        params = (row['ringsize'], row['dataset']['ringIndex'] , row['block'] , row['timestamp'], "Ethereum", row['dataset']['ringHash'], row['dataset']['miner'], 
+                   row['dataset']['orderHashlist'][0], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
+                   row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],row['dataset']['orderHashlist'][2],
+                   row['dataset']['intList'][14],row['dataset']['intList'][15], row['dataset']['intList'][16],row['dataset']['intList'][17])
     else:
-        command = command + str(0) + ", " + str(0) + ", " + str(0) + ", " + str(0) + ", " + str(0) +")"
-    print(command)
-    c.execute(command)
+        params = (row['ringsize'], row['dataset']['ringIndex'] , row['block'] , row['timestamp'], "Ethereum", row['dataset']['ringHash'], row['dataset']['miner'], 
+                   row['dataset']['orderHashlist'][0], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
+                   row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
+                   0,0,0, 0,0)
+    
+    cmd = "INSERT INTO ringdata (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) values("
+    cmd = cmd + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+    c.execute(cmd, (params))
+    conn.commit()
+    
+t = str(9)
+c.execute('select * from ringdata where ringIndex=?',t)
+print (c.fetchall())
 
+#%%
 conn.close()
 
 #%%

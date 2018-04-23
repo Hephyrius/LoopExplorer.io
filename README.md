@@ -77,6 +77,10 @@ Now that the base architecture has been fleshed out, adding new features should 
 
 see proposals/ directory
 
+# Important
+
+Before deploying on a live environment, change secret key, admin password and other related security variables.
+
 
 
 

@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 """
-Created on Fri Apr 20 16:05:30 2018
-
-@author: Khera
+Code responsible for extracting data from etherscan
+@author: Harnick Khera
 """
 #library imports
 import numpy as np

@@ -9,6 +9,8 @@ import numpy as np
 import pandas as pd
 import requests
 import json
+import sqlite3 
+import os
 
 #api ley for etherscan
 api_key = "3YT45XBZMKGYDF8IDECEXN8V4M9FX59MH7"
@@ -64,6 +66,32 @@ for i in data2:
     result=pd.Series([ContractOutput, dataSet, ringsize, i['data'],i['transactionHash']], index=columns)
     stored_data = stored_data.append(result, ignore_index=True)
     
+#%%
+    
+#create a sqlite file
+conn = sqlite3.connect(r"Data.db")
+c = conn.cursor()
+c.execute("""CREATE TABLE ringdata
+                 (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, minerlrc, minerx, minery, minerz, 01address, 01traded, 01market, 01amount. 01fill, 01lrcfee, 01orderhash, 01feepaid, 02address, 02traded, 02market, 02amount. 02fill, 02lrcfee, 02orderhash, 02feepaid, 03address, 03traded, 03market, 03amount. 03fill, 03lrcfee, 03orderhash, 03feepaid)""")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+conn.close()
+
+#%%
 
 
 

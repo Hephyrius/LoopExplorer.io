@@ -12,6 +12,7 @@ Pandas
 
 ### Front end:
 Bootstrap
+jQuery
 
 ### Backend :
 Python

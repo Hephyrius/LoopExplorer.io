@@ -11,6 +11,7 @@ import requests
 import json
 import sqlite3 
 import os
+import datetime as DT
 
 #api ley for etherscan
 api_key = "3YT45XBZMKGYDF8IDECEXN8V4M9FX59MH7"
@@ -30,7 +31,7 @@ request = endpoint + "&fromBlock=" + from_block + "&toBlock=" + to_block + "&add
 data = requests.get(request).json()['result']
 
 #process data and find instances where the topic is the ring mined topic
-columns = ["data","dataset","ringsize","rawdata", "transactionhash"]
+columns = ["data","dataset","ringsize","rawdata", "transactionhash", 'block', 'timestamp']
 stored_data = pd.DataFrame(columns=columns)
 topic = "0x36fe6e0e52b9db0206978557b0c50ef564aeb27c4fce2455a2f459aeefefc23b" 
 data2 = []
@@ -60,36 +61,31 @@ for i in data2:
         uint = ContractOutput[j+ringsize+6+1]
         uint = int(uint, 16)
         intList.append(uint)
-            
-    dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ContractOutput[1], 'miner':ContractOutput[3],'feeRecipient':ContractOutput[4],'orderHashlist':orderHashlist,'intList':intList}
     
-    result=pd.Series([ContractOutput, dataSet, ringsize, i['data'],i['transactionHash']], index=columns)
+    ringhash = ContractOutput[1][24:]
+    miner = "0x"+ContractOutput[3][24:]
+    feerecp = "0x"+ContractOutput[4][24:]
+    dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'feeRecipient':feerecp,'orderHashlist':orderHashlist,'intList':intList}
+    block = int(i['blockNumber'], 16)
+    timestamp = 0 # TODO
+    result=pd.Series([ContractOutput, dataSet, ringsize, i['data'],i['transactionHash'], block, timestamp], index=columns)
     stored_data = stored_data.append(result, ignore_index=True)
     
 #%%
     
-#create a sqlite file
-conn = sqlite3.connect(r"Data.db")
-c = conn.cursor()
-c.execute("""CREATE TABLE ringdata
-                 (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, minerlrc, minerx, minery, minerz, 01address, 01traded, 01market, 01amount. 01fill, 01lrcfee, 01orderhash, 01feepaid, 02address, 02traded, 02market, 02amount. 02fill, 02lrcfee, 02orderhash, 02feepaid, 03address, 03traded, 03market, 03amount. 03fill, 03lrcfee, 03orderhash, 03feepaid)""")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-conn.close()
+##create a sqlite file
+#conn = sqlite3.connect(r"Data.db")
+#c = conn.cursor()
+#c.execute("""CREATE TABLE ringdata
+#                 (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, minerlrc, minerx, minery, minerz, address01, traded01, market01, amount01, fill01, lrcfee01, orderhash01, feepaid01, address02, traded02, market02, amount02, fill02, lrcfee02, orderhash02, feepaid02, address03, traded03, market03, amount03, fill03, lrcfee03, orderhash03, feepaid03)""")
+#%%
+#insert the data into the db
+for i, row in stored_data.iterrows():
+    command = "INSERT INTO ringdata (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, minerlrc, minerx, minery, minerz, address01, traded01, market01, amount01, fill01, lrcfee01, orderhash01, feepaid01, address02, traded02, market02, amount02, fill02, lrcfee02, orderhash02, feepaid02, address03, traded03, market03, amount03, fill03, lrcfee03, orderhash03, feepaid03)"
+    command = command + " \nvalues(" + str(row['ringsize']) +", " + str(row['dataset']['ringIndex']) +", "+ str(row['block']) +", "+ str(row['timestamp']) +", Ethereum, " + str(row['dataset']['ringHash']) +", " + str(row['dataset']['miner']) +", "
+    print(command)
+    #c.execute(command)
+#conn.close()
 
 #%%
 

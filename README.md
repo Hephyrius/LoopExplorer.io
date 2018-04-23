@@ -6,6 +6,7 @@ Prototype ring explorer for the loopring protocol
 
 Python 3.6
 Django
+MySql
 Pandas
 
 # Tech Stack:

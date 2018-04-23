@@ -12,6 +12,8 @@ import json
 import sqlite3 
 import os
 import datetime as DT
+import MySQLdb
+#%%
 
 #api ley for etherscan
 api_key = "3YT45XBZMKGYDF8IDECEXN8V4M9FX59MH7"
@@ -72,12 +74,11 @@ for i in data2:
     stored_data = stored_data.append(result, ignore_index=True)
     
 #%%
-    
-#create a sqlite file
-conn = sqlite3.connect(r"Data.db")
-c = conn.cursor()
-c.execute("""CREATE TABLE ringdata
-                 (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB)""")
+
+conn = MySQLdb.connect(host= "localhost",
+                  user="root",
+                  db="ring")
+x = conn.cursor()
 
 #insert the data into the db
 for i, row in stored_data.iterrows():
@@ -94,17 +95,12 @@ for i, row in stored_data.iterrows():
                    row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
                    0,0,0, 0,0)
     
-    cmd = "INSERT INTO ringdata (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) values("
-    cmd = cmd + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-    c.execute(cmd, (params))
+    cmd = "INSERT INTO web_ring (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) VALUES("
+    cmd = cmd + "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+    x.execute(cmd, (params))
     conn.commit()
-    
-t = str(9)
-c.execute('select * from ringdata where ringIndex=?',t)
-print (c.fetchall())
 
-#%%
-conn.close()
+x.close()
 
 #%%
 

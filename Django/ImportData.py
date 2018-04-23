@@ -9,7 +9,6 @@ import numpy as np
 import pandas as pd
 import requests
 import json
-import sqlite3 
 import os
 import datetime as DT
 import MySQLdb
@@ -75,6 +74,7 @@ for i in data2:
     
 #%%
 
+#connect to mysql
 conn = MySQLdb.connect(host= "localhost",
                   user="root",
                   db="ring")
@@ -100,51 +100,5 @@ for i, row in stored_data.iterrows():
     x.execute(cmd, (params))
     conn.commit()
 
+#close the connection to the db
 x.close()
-
-#%%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#topic = "0x36fe6e0e52b9db0206978557b0c50ef564aeb27c4fce2455a2f459aeefefc23b"
-#topic1 = "0x80af788bd76e7a6ea808e34ec8ad3feb8f1d044df699e01824c9a64ca7c2742c"
-#topicRequest = request = endpoint + "&fromBlock=" + from_block + "&toBlock=" + to_block + "&address=" + loopringimpl_address + "&topic=" + topic1 + "&apikey="+api_key
-#
-#topicData = requests.get(topicRequest).json()['result']

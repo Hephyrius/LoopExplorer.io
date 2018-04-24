@@ -82,15 +82,14 @@ while(True):
             intList = []
             for j in range((ringsize*6)):
                 uint = ContractOutput[j+ringsize+5+1]
-                #print(j+ringsize+5)
                 uint = int(uint, 16)
                 intList.append(uint)
             
             ringhash = ContractOutput[1][24:]
             miner = "0x"+ContractOutput[2][24:]
-            dataSet = {'ringIndex':ringIdx, 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
+            dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
             block = int(i['blockNumber'], 16)
-            timestamp = 0 # TODO
+            timestamp = DT.datetime.fromtimestamp(int(i['timeStamp'],16))
             result=pd.Series([ContractOutput, dataSet, ringsize, i['data'],i['transactionHash'], block, timestamp], index=columns)
             stored_data = stored_data.append(result, ignore_index=True)
             

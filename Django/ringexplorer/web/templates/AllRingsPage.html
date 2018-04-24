@@ -15,6 +15,34 @@
 
   </head>
 	  <body>
+	  
+		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand">Ring Explorer</a>
+
+		  <div class="collapse navbar-collapse" id="">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			
+			  <li class="nav-item active">
+				<a class="nav-link" href="http://localhost:8000/">Home<span class="sr-only">(current)</span></a>
+			  </li>
+			  
+			  <li class="nav-item active">
+				<a class="nav-link" href="http://localhost:8000/allrings/">View All Rings</a>
+			  </li>
+			  
+			</ul>
+			
+				<form method="GET" action="/ring/" class="form-inline justify-content-center">
+					<div class="form-group">
+						<label class="sr-only">Name</label>
+						{{form.ringindex}}
+					</div>
+					<button type="submit" class="btn btn-primary ">Lookup Ring</button>
+				</form>
+			
+		  </div>
+		</nav>
+		
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">

@@ -68,5 +68,63 @@
 			</div>
 		</div>
 	</section>
+	<section>
+		<h3 class="text-center">
+			Last 10 Rings
+		</h3>
+					
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th>
+						Ring Index
+					</th>
+					<th>
+						Chain
+					</th>
+					<th>
+						Block Number
+					</th>
+					<th>
+						Time Stamp
+					</th>
+					<th>
+						Ring Hash
+					</th>
+					<th>
+						Miner Address
+					</th>
+				</tr>
+			</thead>
+			
+			{% block content %}
+				{% for r in result %}
+				<tbody>
+					<tr class="table-active">
+						<td>
+							<a href="http://localhost:8000/ring/?ringindex={{r.ringindex}}">{{r.ringindex }}</a>
+						</td>
+						<td>
+							{{ r.chain }}
+						</td>
+						<td>
+							{{ r.block }}
+						</td>
+						<td>
+							{{ r.timestamp }}
+						</td>
+						<td>
+							{{ r.ringhash }}
+						</td>
+						<td>
+							{{ r.mineraddress }}
+						</td>
+					</tr>
+				</tbody>
+				{% endfor %}
+			{% endblock %}
+			
+		</table>
+	</section>
   </body>
 </html>

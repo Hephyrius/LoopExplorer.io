@@ -6,11 +6,13 @@ from .forms import ringIndexForm
 def index(request):
 	if request.method == 'GET':
 		print(request.GET)
-		
+	
+	data = ring.objects.all().order_by('-id')[:10]
+	
 	form = ringIndexForm()
 	
-	context={'form': form}
-	return render(request, 'HomePage.html', context)
+	context={'result':data, 'form': form}
+	return render_to_response('HomePage.html', context)
 
 def allRings(request):
 	data = ring.objects.all()

@@ -15,6 +15,34 @@
 
   </head>
   <body>
+  
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand">Ring Explorer</a>
+
+	  <div class="collapse navbar-collapse" id="">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		
+		  <li class="nav-item active">
+			<a class="nav-link" href="http://localhost:8000/">Home<span class="sr-only">(current)</span></a>
+		  </li>
+		  
+		  <li class="nav-item active">
+			<a class="nav-link" href="http://localhost:8000/allrings/">View All Rings</a>
+		  </li>
+		  
+		</ul>
+		
+			<form method="GET" action="/ring/" class="form-inline justify-content-center">
+				<div class="form-group">
+					<label class="sr-only">Name</label>
+					{{form.ringindex}}
+				</div>
+				<button type="submit" class="btn btn-primary ">Lookup Ring</button>
+			</form>
+		
+	  </div>
+	</nav>
+	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -45,6 +73,10 @@
 						<tr>
 						  <th>Chain</th>
 							<td>{{result.chain}}</td>
+						</tr>
+						<tr>
+						  <th>Time stamp</th>
+							<td>{{result.timestamp}}</td>
 						</tr>
 						<tr>
 						  <th>Block Number</th>
@@ -107,6 +139,21 @@
 								</tr>
 								
 								<tr>
+								  <th>Amount Traded</th>
+									<td>{{result.order1amount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Amount Received</th>
+									<td>{{result.order1nextamount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Trade Rate</th>
+									<td>1 : {{result.rate1}}</td>
+								</tr>
+								
+								<tr>
 								  <th>Lrc Fee Total</th>
 									<td>{{result.order1lrcFeeState}}</td>
 								</tr>
@@ -144,6 +191,21 @@
 								</tr>
 								
 								<tr>
+								  <th>Amount Traded</th>
+									<td>{{result.order2amount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Amount Received</th>
+									<td>{{result.order2nextamount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Trade Rate</th>
+									<td>1 : {{result.rate2}}</td>
+								</tr>
+								
+								<tr>
 								  <th>Lrc Fee Total</th>
 									<td>{{result.order2lrcFeeState}}</td>
 								</tr>
@@ -176,27 +238,41 @@
 								<tbody>
 									<tr>
 									  <th>Order Hash</th>
-										<td>0</td>
+										<td>{{result.order3hash}}</td>
+									</tr>
+									<tr>
+									  <th>Amount Traded</th>
+										<td>{{result.order3amount}}</td>
 									</tr>
 									
 									<tr>
+									  <th>Amount Received</th>
+										<td>{{result.order3nextamount}}</td>
+									</tr>
+									
+									<tr>
+									  <th>Trade Rate</th>
+										<td>1 : {{result.rate3}}</td>
+									</tr>
+										
+									<tr>
 									  <th>Lrc Fee Total</th>
-										<td>0</td>
+										<td>{{result.order3lrcFeeState}}</td>
 									</tr>
 									
 									<tr>
 									  <th>Lrc Fee Miner</th>
-										<td>0</td>
+										<td>{{result.order2lrcReward}}</td>
 									</tr>
 									
 									<tr>
 									  <th>Split Seller</th>
-										<td>0</td>
+										<td>{{result.order2splitS}}</td>
 									</tr>
 									
 									<tr>
 									  <th>Split Buyer</th>
-										<td>0</td>
+										<td>{{result.order2splitB}}</td>
 									</tr>
 								</tbody>
 							</table>

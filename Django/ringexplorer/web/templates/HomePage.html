@@ -15,25 +15,51 @@
 
   </head>
   <body>
+		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand">Ring Explorer</a>
+
+		  <div class="collapse navbar-collapse" id="">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			
+			  <li class="nav-item active">
+				<a class="nav-link" href="http://localhost:8000/">Home<span class="sr-only">(current)</span></a>
+			  </li>
+			  
+			  <li class="nav-item active">
+				<a class="nav-link" href="http://localhost:8000/allrings/">View All Rings</a>
+			  </li>
+			  
+			</ul>
+			
+				<form method="GET" action="/ring/" class="form-inline justify-content-center">
+					<div class="form-group">
+						<label class="sr-only">Name</label>
+						{{form.ringindex}}
+					</div>
+					<button type="submit" class="btn btn-primary ">Lookup Ring</button>
+				</form>
+			
+		  </div>
+		</nav>
 	<section id="cover">
 		<div id="cover-caption">
 			<div id="container" class="container">
 				<div class="vertical-center"
 					<div class="row text-black">
 						<div class="col-sm-10 offset-sm-1 text-center">
-							<h1 class="display-3">Ring Explorer Prototype</h1>
+							<h1 class="display-3">Ring Explorer Prototype V0.2</h1>
 							<div class="info-form">
 								<form method="GET" action="/ring/" class="form-inline justify-content-center">
 									<div class="form-group">
 										<label class="sr-only">Name</label>
 										{{form.ringindex}}
 									</div>
-									<button type="submit" class="btn btn-success ">Lookup Ring</button>
+									<button type="submit" class="btn btn-primary ">Lookup Ring</button>
 								</form>
 							</div>
 							<br>
 
-							<a href="allrings" class="btn btn-outline-secondary btn-sm" role="button">
+							<a href="allrings" class="btn btn-outline-primary btn-sm" role="button">
 								Browse All Rings
 							</a>
 						</div>
@@ -41,6 +67,58 @@
 				</div>
 			</div>
 		</div>
+	</section>
+	<section>
+		<h3 class="text-center">
+			Last 10 Rings
+		</h3>
+					
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th>
+						Ring Index
+					</th>
+					<th>
+						Chain
+					</th>
+					<th>
+						Block Number
+					</th>
+					<th>
+						Time Stamp
+					</th>
+					<th>
+						Ring Hash
+					</th>
+				</tr>
+			</thead>
+			
+			{% block content %}
+				{% for r in result %}
+				<tbody>
+					<tr class="table-active">
+						<td>
+							<a href="http://localhost:8000/ring/?ringindex={{r.ringindex}}">{{r.ringindex }}</a>
+						</td>
+						<td>
+							{{ r.chain }}
+						</td>
+						<td>
+							{{ r.block }}
+						</td>
+						<td>
+							{{ r.timestamp }}
+						</td>
+						<td>
+							{{ r.ringhash }}
+						</td>
+					</tr>
+				</tbody>
+				{% endfor %}
+			{% endblock %}
+			
+		</table>
 	</section>
   </body>
 </html>

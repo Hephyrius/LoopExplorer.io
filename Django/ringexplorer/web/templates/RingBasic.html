@@ -135,6 +135,21 @@
 								</tr>
 								
 								<tr>
+								  <th>Amount Traded</th>
+									<td>{{result.order1amount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Amount Received</th>
+									<td>{{result.order1nextamount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Trade Rate</th>
+									<td>1 : {{result.rate1}}</td>
+								</tr>
+								
+								<tr>
 								  <th>Lrc Fee Total</th>
 									<td>{{result.order1lrcFeeState}}</td>
 								</tr>
@@ -172,6 +187,21 @@
 								</tr>
 								
 								<tr>
+								  <th>Amount Traded</th>
+									<td>{{result.order2amount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Amount Received</th>
+									<td>{{result.order2nextamount}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Trade Rate</th>
+									<td>1 : {{result.rate2}}</td>
+								</tr>
+								
+								<tr>
 								  <th>Lrc Fee Total</th>
 									<td>{{result.order2lrcFeeState}}</td>
 								</tr>
@@ -204,27 +234,41 @@
 								<tbody>
 									<tr>
 									  <th>Order Hash</th>
-										<td>0</td>
+										<td>{{result.order3hash}}</td>
+									</tr>
+									<tr>
+									  <th>Amount Traded</th>
+										<td>{{result.order3amount}}</td>
 									</tr>
 									
 									<tr>
-									  <th>Lrc Fee Total</th>
+									  <th>Amount Received</th>
+										<td>{{result.order3nextamount}}</td>
+									</tr>
+									
+									<tr>
+									  <th>Trade Rate</th>
 										<td>0</td>
+									</tr>
+										
+									<tr>
+									  <th>Lrc Fee Total</th>
+										<td>{{result.order3lrcFeeState}}</td>
 									</tr>
 									
 									<tr>
 									  <th>Lrc Fee Miner</th>
-										<td>0</td>
+										<td>{{result.order2lrcReward}}</td>
 									</tr>
 									
 									<tr>
 									  <th>Split Seller</th>
-										<td>0</td>
+										<td>{{result.order2splitS}}</td>
 									</tr>
 									
 									<tr>
 									  <th>Split Buyer</th>
-										<td>0</td>
+										<td>{{result.order2splitB}}</td>
 									</tr>
 								</tbody>
 							</table>

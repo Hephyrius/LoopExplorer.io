@@ -13,7 +13,7 @@ import MySQLdb
 #%%
 
 #api ley for etherscan
-api_key = "APIKEY"
+api_key = "3YT45XBZMKGYDF8IDECEXN8V4M9FX59MH7"
 
 #loopringimpl deployment address
 loopringimpl_address = "0xb1170dE31c7f72aB62535862C97F5209E356991b"
@@ -58,7 +58,6 @@ for i in data2:
     intList = []
     for j in range((ringsize*6)):
         uint = ContractOutput[j+ringsize+5+1]
-        print(j+ringsize+5)
         uint = int(uint, 16)
         intList.append(uint)
     
@@ -66,7 +65,7 @@ for i in data2:
     miner = "0x"+ContractOutput[2][24:]
     dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
     block = int(i['blockNumber'], 16)
-    timestamp = 0 # TODO
+    timestamp = DT.datetime.fromtimestamp(i['timeStamp'])
     result=pd.Series([ContractOutput, dataSet, ringsize, i['data'],i['transactionHash'], block, timestamp], index=columns)
     stored_data = stored_data.append(result, ignore_index=True)
     
@@ -84,17 +83,17 @@ for i, row in stored_data.iterrows():
     params = ()
     if(row['ringsize'] == 3):
         params = (row['ringsize'], row['dataset']['ringIndex'] , row['block'] , row['timestamp'], "Ethereum", row['dataset']['ringHash'], row['dataset']['miner'], 
-                   row['dataset']['orderHashlist'][0], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
-                   row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],row['dataset']['orderHashlist'][2],
-                   row['dataset']['intList'][14],row['dataset']['intList'][15], row['dataset']['intList'][16],row['dataset']['intList'][17])
+                   row['dataset']['orderHashlist'][0], row['dataset']['intList'][0], row['dataset']['intList'][1], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
+                   row['dataset']['orderHashlist'][1], row['dataset']['intList'][6], row['dataset']['intList'][7],row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
+                   row['dataset']['orderHashlist'][2], row['dataset']['intList'][12], row['dataset']['intList'][13], row['dataset']['intList'][14],row['dataset']['intList'][15], row['dataset']['intList'][16],row['dataset']['intList'][17])
     else:
         params = (row['ringsize'], row['dataset']['ringIndex'] , row['block'] , row['timestamp'], "Ethereum", row['dataset']['ringHash'], row['dataset']['miner'], 
-                   row['dataset']['orderHashlist'][0], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
-                   row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
-                   0,0,0, 0,0)
+                   row['dataset']['orderHashlist'][0], row['dataset']['intList'][0], row['dataset']['intList'][1], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
+                   row['dataset']['orderHashlist'][1], row['dataset']['intList'][6], row['dataset']['intList'][7],row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
+                   0, 0, 0, 0, 0, 0, 0)
     
-    cmd = "INSERT INTO web_ring (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) VALUES("
-    cmd = cmd + "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+    cmd = "INSERT INTO web_ring (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1amount, order1nextamount, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2amount, order2nextamount, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3amount, order3nextamount, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) VALUES("
+    cmd = cmd + "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
     x.execute(cmd, (params))
     conn.commit()
 

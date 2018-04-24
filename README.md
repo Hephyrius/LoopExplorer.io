@@ -2,6 +2,7 @@
 
 Prototype ring explorer for the loopring protocol. 
 Written in Bootstrap and Django.
+[Click here to see a live version](https://harnickkhera.com:8000)
 
 # Requirements
 

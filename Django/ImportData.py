@@ -61,7 +61,7 @@ for i in data2:
         uint = int(uint, 16)
         intList.append(uint)
     
-    ringhash = ContractOutput[1][24:]
+    ringhash = i['topics'][1]
     miner = "0x"+ContractOutput[2][24:]
     dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
     block = int(i['blockNumber'], 16)

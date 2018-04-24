@@ -32,7 +32,7 @@ while(True):
     
     
     #api ley for etherscan
-    api_key = "APIKEY"
+    api_key = "apikey"
     
     #loopringimpl deployment address
     loopringimpl_address = "0xb1170dE31c7f72aB62535862C97F5209E356991b"
@@ -104,17 +104,17 @@ while(True):
         params = ()
         if(row['ringsize'] == 3):
             params = (row['ringsize'], row['dataset']['ringIndex'] , row['block'] , row['timestamp'], "Ethereum", row['dataset']['ringHash'], row['dataset']['miner'], 
-                       row['dataset']['orderHashlist'][0], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
-                       row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],row['dataset']['orderHashlist'][2],
-                       row['dataset']['intList'][14],row['dataset']['intList'][15], row['dataset']['intList'][16],row['dataset']['intList'][17])
+                       row['dataset']['orderHashlist'][0], row['dataset']['intList'][0], row['dataset']['intList'][1], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
+                       row['dataset']['orderHashlist'][1], row['dataset']['intList'][6], row['dataset']['intList'][7],row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
+                       row['dataset']['orderHashlist'][2], row['dataset']['intList'][12], row['dataset']['intList'][13], row['dataset']['intList'][14],row['dataset']['intList'][15], row['dataset']['intList'][16],row['dataset']['intList'][17])
         else:
             params = (row['ringsize'], row['dataset']['ringIndex'] , row['block'] , row['timestamp'], "Ethereum", row['dataset']['ringHash'], row['dataset']['miner'], 
-                       row['dataset']['orderHashlist'][0], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
-                       row['dataset']['orderHashlist'][1], row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
-                       0,0,0, 0,0)
+                       row['dataset']['orderHashlist'][0], row['dataset']['intList'][0], row['dataset']['intList'][1], row['dataset']['intList'][2] , row['dataset']['intList'][3] , row['dataset']['intList'][4], row['dataset']['intList'][5], 
+                       row['dataset']['orderHashlist'][1], row['dataset']['intList'][6], row['dataset']['intList'][7],row['dataset']['intList'][8], row['dataset']['intList'][9], row['dataset']['intList'][10], row['dataset']['intList'][11],
+                       0, 0, 0, 0, 0, 0, 0)
         
-        cmd = "INSERT INTO web_ring (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) VALUES("
-        cmd = cmd + "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+        cmd = "INSERT INTO web_ring (ringsize, ringindex, block, timestamp, chain, ringhash, mineraddress, order1hash, order1amount, order1nextamount, order1lrcReward, order1lrcFeeState, order1splitS, order1splitB, order2hash, order2amount, order2nextamount, order2lrcReward, order2lrcFeeState, order2splitS, order2splitB, order3hash, order3amount, order3nextamount, order3lrcReward, order3lrcFeeState, order3splitS, order3splitB) VALUES("
+        cmd = cmd + "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
         x.execute(cmd, (params))
         conn.commit()
     

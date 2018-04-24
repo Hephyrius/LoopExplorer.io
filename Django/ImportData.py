@@ -65,7 +65,7 @@ for i in data2:
     miner = "0x"+ContractOutput[2][24:]
     dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
     block = int(i['blockNumber'], 16)
-    timestamp = DT.datetime.fromtimestamp(i['timeStamp'])
+    timestamp = DT.datetime.fromtimestamp(int(i['timeStamp'],16))
     result=pd.Series([ContractOutput, dataSet, ringsize, i['data'],i['transactionHash'], block, timestamp], index=columns)
     stored_data = stored_data.append(result, ignore_index=True)
     

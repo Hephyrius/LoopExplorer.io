@@ -58,8 +58,10 @@ for i in data2:
     intList = []
     for j in range((ringsize*6)):
         uint = ContractOutput[j+ringsize+5+1]
-        uint = int(uint, 16)
+
+        uint = int(uint, 16)/1e18
         intList.append(uint)
+
     
     ringhash = i['topics'][1]
     miner = "0x"+ContractOutput[2][24:]

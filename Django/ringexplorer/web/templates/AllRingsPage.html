@@ -19,7 +19,6 @@
 		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
 		  <a class="navbar-brand">LoopExplorer.io</a>
 
-		  <div class="collapse navbar-collapse" id="">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			
 			  <li class="nav-item active">
@@ -32,15 +31,14 @@
 			  
 			</ul>
 			
-				<form method="GET" action="/ring/" class="form-inline justify-content-center">
-					<div class="form-group">
-						<label class="sr-only">Name</label>
-						{{form.ringindex}}
-					</div>
-					<button type="submit" class="btn btn-primary ">Lookup Ring</button>
-				</form>
-			
-		  </div>
+			<form method="GET" action="/ring/" class="form-inline justify-content-center">
+				<div class="form-group">
+					<label class="sr-only">Name</label>
+					{{form.ringindex}}
+				</div>
+				<button type="submit" class="btn btn-primary ">Lookup Ring</button>
+			</form>
+
 		</nav>
 		
 		<div class="container-fluid">

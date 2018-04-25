@@ -1,6 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
 from django.db.models import F
+from django.core.paginator import Paginator
 from .models import ring
 from .forms import ringIndexForm
 
@@ -20,8 +21,13 @@ def allRings(request):
 	data = ring.objects.all()
 	
 	form = ringIndexForm()
-	context={'result':data, 'form': form}
 	
+	paginator = Paginator(data, 15)
+	
+	page = request.GET.get('page')
+	data = paginator.get_page(page)
+	
+	context={'result':data, 'form': form}
 	return render_to_response('AllRingsPage.html', context)
 	
 def getRing(request):

@@ -36,7 +36,9 @@ def getRing(request):
 	rate1=F('order1nextamount')/F('order1amount')).annotate(
 	rate2=F('order2nextamount')/F('order2amount')).annotate(
 	rate3=F('order3nextamount')/F('order3amount')).annotate(
-	lrcFees=F('order1lrcFeeState')+F('order2lrcFeeState')+F('order3lrcFeeState'))
+	lrcFees=F('order1lrcFeeState')+F('order2lrcFeeState')+F('order3lrcFeeState')).annotate(
+	token2Fees=F('order1splitB')+F('order2splitS')).annotate(
+	token1Fees=F('order2splitB')+F('order1splitS'))
 
 	form = ringIndexForm()
 	context={'result':data[0],'form': form}

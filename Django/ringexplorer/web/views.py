@@ -32,7 +32,11 @@ def allRings(request):
 	
 def getRing(request):
 	query = request.GET.get('ringindex')
-	data = ring.objects.filter(ringindex = query).annotate(rate1=F('order1nextamount')/F('order1amount')).annotate(rate2=F('order2nextamount')/F('order2amount')).annotate(rate3=F('order3nextamount')/F('order3amount'))
+	data = ring.objects.filter(ringindex = query).annotate(
+	rate1=F('order1nextamount')/F('order1amount')).annotate(
+	rate2=F('order2nextamount')/F('order2amount')).annotate(
+	rate3=F('order3nextamount')/F('order3amount')).annotate(
+	lrcFees=F('order1lrcFeeState')+F('order2lrcFeeState')+F('order3lrcFeeState'))
 
 	form = ringIndexForm()
 	context={'result':data[0],'form': form}

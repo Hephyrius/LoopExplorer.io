@@ -64,7 +64,7 @@ for i in data2:
 
     
     ringhash = i['topics'][1]
-    miner = "0x"+ContractOutput[2][24:]
+    miner = "0x"+ContractOutput[1][24:]
     dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
     block = int(i['blockNumber'], 16)
     timestamp = DT.datetime.fromtimestamp(int(i['timeStamp'],16))

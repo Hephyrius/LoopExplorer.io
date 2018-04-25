@@ -163,15 +163,19 @@
 									<td>{{result.order1lrcReward}}</td>
 								</tr>
 								
+								{% if result.order1splitS > '0' %}
 								<tr>
-								  <th>Split Seller</th>
+								  <th>Token2 paid as Fee</th>
 									<td>{{result.order1splitS}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order1splitB > '0' %}
 								<tr>
-								  <th>Split Buyer</th>
+								  <th>Token1 paid as Fee</th>
 									<td>{{result.order1splitB}}</td>
 								</tr>
+								{% endif %}
 								
 							</tbody>
 						</table>
@@ -215,15 +219,19 @@
 									<td>{{result.order2lrcReward}}</td>
 								</tr>
 								
+								{% if result.order2splitS > '0' %}
 								<tr>
-								  <th>Split Seller</th>
+								  <th>Token1 paid as Fee</th>
 									<td>{{result.order2splitS}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order2splitB > '0' %}
 								<tr>
-								  <th>Split Buyer</th>
+								  <th>Token2 paid as Fee</th>
 									<td>{{result.order2splitB}}</td>
 								</tr>
+								{% endif %}
 							</tbody>
 						</table>
 					</div>
@@ -265,15 +273,20 @@
 										<td>{{result.order2lrcReward}}</td>
 									</tr>
 									
+									{% if result.order3splitS > '0' %}
 									<tr>
-									  <th>Split Seller</th>
-										<td>{{result.order2splitS}}</td>
+									  <th>Token1 paid as Fee</th>
+										<td>{{result.order3splitS}}</td>
 									</tr>
+									{% endif %}
 									
+									{% if result.order3splitB > '0' %}
 									<tr>
-									  <th>Split Buyer</th>
-										<td>{{result.order2splitB}}</td>
+									  <th>Token2 paid as Fee</th>
+										<td>{{result.order3splitB}}</td>
 									</tr>
+									{% endif %}
+									
 								</tbody>
 							</table>
 						</div>

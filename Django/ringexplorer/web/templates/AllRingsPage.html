@@ -8,7 +8,7 @@
 
     <title>All Rings</title>
 
-    <meta name="description" content="Prototype Ring Explorer: All Rings">
+    <meta name="description" content="Loop Explorer: All Rings">
     <meta name="author" content="Harnick Khera - Hephyrius">
 
     <link href={% static "css/bootstrap.css" %} rel="stylesheet">
@@ -17,7 +17,7 @@
 	  <body>
 	  
 		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-		  <a class="navbar-brand">Ring Explorer</a>
+		  <a class="navbar-brand">LoopExplorer.io</a>
 
 		  <div class="collapse navbar-collapse" id="">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -100,5 +100,35 @@
 				</div>
 			</div>
 		</div>
+	
+	<nav aria-label="All Rings Pagination">
+	  <ul class="pagination justify-content-center">
+	  
+		{% if result.has_previous %}
+		<li class="page-item">
+		  <a class="page-link" href="?page={{ result.previous_page_number }}">Previous</a>
+		</li>
+		{%else%}
+		<li class="page-item disabled">
+		  <a class="page-link" href="#" tabindex="-1">Previous</a>
+		</li>
+		{% endif %}
+		
+		<li class="page-item active">
+		  <a class="page-link" href="#">{{ result.number }} <span class="sr-only">(current)</span></a>
+		</li>
+
+		{% if result.has_next %}
+		<li class="page-item">
+		  <a class="page-link" href="?page={{ result.next_page_number }}">Next</a>
+		</li>
+		{%else%}
+		<li class="page-item disabled">
+		  <a class="page-link" href="#">Next</a>
+		</li>
+		{% endif %}
+	  </ul>
+	</nav>
+
   </body>
 </html>

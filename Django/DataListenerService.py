@@ -86,7 +86,7 @@ while(True):
                 intList.append(uint)
             
             ringhash = i['topics'][1]
-            miner = "0x"+ContractOutput[2][24:]
+            miner = "0x"+ContractOutput[1][24:]
             dataSet = {'ringIndex':int(ContractOutput[0], 16), 'ringHash':ringhash, 'miner':miner,'orderHashlist':orderHashlist,'intList':intList}
             block = int(i['blockNumber'], 16)
             timestamp = DT.datetime.fromtimestamp(int(i['timeStamp'],16))
@@ -118,6 +118,6 @@ while(True):
         conn.commit()
     
     #sleep for half a minute before checking again
-    time.sleep(30)
+    time.sleep(60)
 #close the connection to the db
 x.close()

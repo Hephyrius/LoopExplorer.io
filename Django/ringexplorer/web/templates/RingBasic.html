@@ -8,7 +8,7 @@
 
     <title>Ring Details</title>
 
-    <meta name="description" content="Prototype Ring Explorer: Ring Details">
+    <meta name="description" content="Prototype Loop Explorer: Ring Details">
     <meta name="author" content="Harnick Khera - Hephyrius">
 
     <link href= {% static "css/bootstrap.css" %} rel="stylesheet">
@@ -17,7 +17,7 @@
   <body>
   
 	<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand">Ring Explorer</a>
+	  <a class="navbar-brand">LoopExplorer.io</a>
 
 	  <div class="collapse navbar-collapse" id="">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -99,7 +99,7 @@
 		  <li class="nav-item">
 			<a class="nav-link" id="order2-tab" data-toggle="tab" href="#order2" role="tab" aria-controls="order2" aria-selected="false">Order 2 Details</a>
 		  </li>
-		{% if result.ringsize == "3" %}
+		{% if result.ringsize >= "3" %}
 			  <li class="nav-item">
 				<a class="nav-link" id="order3-tab" data-toggle="tab" href="#order3" role="tab" aria-controls="order2" aria-selected="false">Order 3 Details</a>
 			  </li>
@@ -114,13 +114,32 @@
 						<table class="table table-hover table-striped">
 							<tbody>
 								<tr>
-								  <th>Address</th>
+								  <th>Miner Address</th>
 									<td>{{result.mineraddress}}</td>
 								</tr>
+								
 								<tr>
 								  <th>Total LRC Received</th>
+									<td>{{result.lrcFees}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Total Token1 Received</th>
+									<td>{{result.token1Fees}}</td>
+								</tr>
+								
+								<tr>
+								  <th>Total Token2 Received</th>
+									<td>{{result.token2Fees}}</td>
+								</tr>
+								{% if result.ringsize >= "3" %}
+								
+								<tr>
+								  <th>Total Token3 Received</th>
 									<td>0</td>
 								</tr>
+								
+								{%endif%}
 							</tbody>
 						</table>
 					</div>
@@ -153,25 +172,33 @@
 									<td>1 : {{result.rate1}}</td>
 								</tr>
 								
+								{% if result.order1lrcFeeState > '0' %}
 								<tr>
-								  <th>Lrc Fee Total</th>
-									<td>{{result.order1lrcFeeState}}</td>
+								  <th>Lrc Paid as Fee</th>
+									<td>{{result.order11lrcFeeState}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order1lrcReward > '0' %}
 								<tr>
-								  <th>Lrc Reward Miner</th>
+								  <th>Lrc Reward</th>
 									<td>{{result.order1lrcReward}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order1splitS > '0' %}
 								<tr>
-								  <th>Split Seller</th>
+								  <th>Sold Token used as fee</th>
 									<td>{{result.order1splitS}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order1splitB > '0' %}
 								<tr>
-								  <th>Split Buyer</th>
+								  <th>Purchased Token used as fee</th>
 									<td>{{result.order1splitB}}</td>
 								</tr>
+								{% endif %}
 								
 							</tbody>
 						</table>
@@ -205,25 +232,33 @@
 									<td>1 : {{result.rate2}}</td>
 								</tr>
 								
+								{% if result.order2lrcFeeState > '0' %}
 								<tr>
-								  <th>Lrc Fee Total</th>
+								  <th>Lrc Paid as Fee</th>
 									<td>{{result.order2lrcFeeState}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order2lrcReward > '0' %}
 								<tr>
 								  <th>Lrc Reward Miner</th>
 									<td>{{result.order2lrcReward}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order2splitS > '0' %}
 								<tr>
-								  <th>Split Seller</th>
+								  <th>Sold Token used as fee</th>
 									<td>{{result.order2splitS}}</td>
 								</tr>
+								{% endif %}
 								
+								{% if result.order2splitB > '0' %}
 								<tr>
-								  <th>Split Buyer</th>
+								  <th>Purchased Token used as fee</th>
 									<td>{{result.order2splitB}}</td>
 								</tr>
+								{% endif %}
 							</tbody>
 						</table>
 					</div>
@@ -255,25 +290,34 @@
 										<td>1 : {{result.rate3}}</td>
 									</tr>
 										
+									{% if result.order3lrcFeeState > '0' %}
 									<tr>
-									  <th>Lrc Fee Total</th>
-										<td>{{result.order3lrcFeeState}}</td>
+									  <th>Lrc Paid as Fee</th>
+										<td>{{result.order31lrcFeeState}}</td>
 									</tr>
+									{% endif %}
 									
+									{% if result.order3lrcReward > '0' %}
 									<tr>
-									  <th>Lrc Fee Miner</th>
-										<td>{{result.order2lrcReward}}</td>
+									  <th>Lrc Reward</th>
+										<td>{{result.order3lrcReward}}</td>
 									</tr>
+									{% endif %}
 									
+									{% if result.order3splitS > '0' %}
 									<tr>
-									  <th>Split Seller</th>
-										<td>{{result.order2splitS}}</td>
+									  <th>Sold Token used as fee</th>
+										<td>{{result.order3splitS}}</td>
 									</tr>
+									{% endif %}
 									
+									{% if result.order3splitB > '0' %}
 									<tr>
-									  <th>Split Buyer</th>
-										<td>{{result.order2splitB}}</td>
+									  <th>Purchased Token used as fee</th>
+										<td>{{result.order3splitB}}</td>
 									</tr>
+									{% endif %}
+									
 								</tbody>
 							</table>
 						</div>

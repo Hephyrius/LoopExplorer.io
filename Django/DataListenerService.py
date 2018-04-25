@@ -118,6 +118,6 @@ while(True):
         conn.commit()
     
     #sleep for half a minute before checking again
-    time.sleep(30)
+    time.sleep(60)
 #close the connection to the db
 x.close()

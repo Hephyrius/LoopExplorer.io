@@ -17,79 +17,62 @@
   <body>
   
 	<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand">LoopExplorer.io</a>
+	  <a class="navbar-brand" href="#">LoopExplorer.io</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
 
+	  <div class="collapse navbar-collapse" id="navbarToggle">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-		
-		  <li class="nav-item active">
-			<a class="nav-link" href="http://localhost:8000/">Home<span class="sr-only">(current)</span></a>
+		  <li class="nav-item">
+			<a class="nav-link" href="http://localhost:8000/">Home</a>
 		  </li>
-		  
-		  <li class="nav-item active">
+		  <li class="nav-item">
 			<a class="nav-link" href="http://localhost:8000/allrings/">View All Rings</a>
 		  </li>
-		  
 		</ul>
 		
-		<form method="GET" action="/ring/" class="form-inline justify-content-center">
-			<div class="form-group">
-				<label class="sr-only">Name</label>
-				{{form.ringindex}}
-			</div>
-			<button type="submit" class="btn btn-primary ">Lookup Ring</button>
+		<form method="GET" action="/ring/" class="form-inline my-2 my-lg-0">
+		  {{form.ringindex}}
+		  <button class="btn btn-primary my-2 my-sm-0" type="submit">Lookup Ring</button>
 		</form>
+	  </div>
 	</nav>
 	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<h3 class="text-center">
-				Ring Details
-				</h3>
-			</div>
-		</div>
+	<div id="container" class="container">
+		<h3>Ring Details</h3>
+		<table class="table table-hover table-striped table-responsive">
+			<tbody>
+				<tr>
+				  <th>Ring Index</th>
+					<td>{{result.ringindex}}</td>
+				</tr>
+				<tr>
+				  <th>Ring Hash</th>
+					<td>{{result.ringhash}}</td>
+				</tr>
+				<tr>
+				  <th>Ring Size</th>
+					<td>{{result.ringsize}}</td>
+				</tr>
+				<tr>
+				  <th>Chain</th>
+					<td>{{result.chain}}</td>
+				</tr>
+				<tr>
+				  <th>Time stamp</th>
+					<td>{{result.timestamp}}</td>
+				</tr>
+				<tr>
+				  <th>Block Number</th>
+					<td>{{result.block}}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-hover table-striped">
-					<tbody>
-						<tr>
-						  <th>Ring Index</th>
-							<td>{{result.ringindex}}</td>
-						</tr>
-						<tr>
-						  <th>Ring Hash</th>
-							<td>{{result.ringhash}}</td>
-						</tr>
-						<tr>
-						  <th>Ring Size</th>
-							<td>{{result.ringsize}}</td>
-						</tr>
-						<tr>
-						  <th>Chain</th>
-							<td>{{result.chain}}</td>
-						</tr>
-						<tr>
-						  <th>Time stamp</th>
-							<td>{{result.timestamp}}</td>
-						</tr>
-						<tr>
-						  <th>Block Number</th>
-							<td>{{result.block}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-
-	<div class="container-fluid">
+	<div id="container" class="container">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
-		  <li class="nav-item">
-			<a class="nav-link active" id="fee-tab" data-toggle="tab" href="#fee" role="tab" aria-controls="fee" aria-selected="true">Fee Details</a>
-		  </li>
 		  <li class="nav-item">
 			<a class="nav-link" id="order1-tab" data-toggle="tab" href="#order1" role="tab" aria-controls="order1" aria-selected="false">Order 1 Details</a>
 		  </li>
@@ -101,235 +84,222 @@
 				<a class="nav-link" id="order3-tab" data-toggle="tab" href="#order3" role="tab" aria-controls="order2" aria-selected="false">Order 3 Details</a>
 			  </li>
 		{%endif%}
+		  <li class="nav-item">
+			<a class="nav-link active" id="fee-tab" data-toggle="tab" href="#fee" role="tab" aria-controls="fee" aria-selected="true">Fee Details</a>
+		  </li>
 		</ul>
 
 		<div class="tab-content">
 		  <div class="tab-pane active" id="fee" role="tabpanel" aria-labelledby="home-tab">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover table-striped">
-							<tbody>
-								<tr>
-								  <th>Miner Address</th>
-									<td>{{result.mineraddress}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Total LRC Received</th>
-									<td>{{result.lrcFees}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Total Token1 Received</th>
-									<td>{{result.token1Fees}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Total Token2 Received</th>
-									<td>{{result.token2Fees}}</td>
-								</tr>
-								{% if result.ringsize >= "3" %}
-								
-								<tr>
-								  <th>Total Token3 Received</th>
-									<td>0</td>
-								</tr>
-								
-								{%endif%}
-							</tbody>
-						</table>
-					</div>
-				</div>
+			<div id="container" class="container">
+				<table class="table table-hover table-striped table-responsive">
+					<tbody>
+						<tr>
+						  <th>Miner Address</th>
+							<td>{{result.mineraddress}}</td>
+						</tr>
+						
+						<tr>
+						  <th>Total LRC Received</th>
+							<td>{{result.lrcFees}}</td>
+						</tr>
+						
+						<tr>
+						  <th>Total Token1 Received</th>
+							<td>{{result.token1Fees}}</td>
+						</tr>
+						
+						<tr>
+						  <th>Total Token2 Received</th>
+							<td>{{result.token2Fees}}</td>
+						</tr>
+						{% if result.ringsize >= "3" %}
+						
+						<tr>
+						  <th>Total Token3 Received</th>
+							<td>0</td>
+						</tr>
+						
+						{%endif%}
+					</tbody>
+				</table>
 			</div>
+			
 		  </div>
 		  <div class="tab-pane" id="order1" role="tabpanel" aria-labelledby="order1-tab">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover table-striped">
-							<tbody>
-								<tr>
-								  <th>Order Hash</th>
-									<td>{{result.order1hash}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Amount Traded</th>
-									<td>{{result.order1amount}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Amount Received</th>
-									<td>{{result.order1nextamount}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Trade Rate</th>
-									<td>1 : {{result.rate1}}</td>
-								</tr>
-								
-								{% if result.order1lrcFeeState > '0' %}
-								<tr>
-								  <th>Lrc Paid as Fee</th>
-									<td>{{result.order1lrcFeeState}}</td>
-								</tr>
-								{% endif %}
-								
-								{% if result.order1lrcReward > '0' %}
-								<tr>
-								  <th>Lrc Reward</th>
-									<td>{{result.order1lrcReward}}</td>
-								</tr>
-								{% endif %}
-								
-								{% if result.order1splitS > '0' %}
-								<tr>
-								  <th>Sold Token used as fee</th>
-									<td>{{result.order1splitS}}</td>
-								</tr>
-								{% endif %}
-								
-								{% if result.order1splitB > '0' %}
-								<tr>
-								  <th>Purchased Token used as fee</th>
-									<td>{{result.order1splitB}}</td>
-								</tr>
-								{% endif %}
-								
-							</tbody>
-						</table>
-					</div>
+				<div id="container" class="container">
+					<table class="table table-hover table-striped table-responsive">
+						<tbody>
+							<tr>
+							  <th>Order Hash</th>
+								<td>{{result.order1hash}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Amount Traded</th>
+								<td>{{result.order1amount}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Amount Received</th>
+								<td>{{result.order1nextamount}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Trade Rate</th>
+								<td>1 : {{result.rate1}}</td>
+							</tr>
+							
+							{% if result.order1lrcFeeState > '0' %}
+							<tr>
+							  <th>Lrc Paid as Fee</th>
+								<td>{{result.order1lrcFeeState}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order1lrcReward > '0' %}
+							<tr>
+							  <th>Lrc Reward</th>
+								<td>{{result.order1lrcReward}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order1splitS > '0' %}
+							<tr>
+							  <th>Sold Token used as fee</th>
+								<td>{{result.order1splitS}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order1splitB > '0' %}
+							<tr>
+							  <th>Purchased Token used as fee</th>
+								<td>{{result.order1splitB}}</td>
+							</tr>
+							{% endif %}
+							
+						</tbody>
+					</table>
 				</div>
 			</div>
-		  </div>
+		  
 		  <div class="tab-pane" id="order2" role="tabpanel" aria-labelledby="order2-tab">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover table-striped">
-							<tbody>
-								<tr>
-								  <th>Order Hash</th>
-									<td>{{result.order2hash}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Amount Traded</th>
-									<td>{{result.order2amount}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Amount Received</th>
-									<td>{{result.order2nextamount}}</td>
-								</tr>
-								
-								<tr>
-								  <th>Trade Rate</th>
-									<td>1 : {{result.rate2}}</td>
-								</tr>
-								
-								{% if result.order2lrcFeeState > '0' %}
-								<tr>
-								  <th>Lrc Paid as Fee</th>
-									<td>{{result.order2lrcFeeState}}</td>
-								</tr>
-								{% endif %}
-								
-								{% if result.order2lrcReward > '0' %}
-								<tr>
-								  <th>Lrc Reward Miner</th>
-									<td>{{result.order2lrcReward}}</td>
-								</tr>
-								{% endif %}
-								
-								{% if result.order2splitS > '0' %}
-								<tr>
-								  <th>Sold Token used as fee</th>
-									<td>{{result.order2splitS}}</td>
-								</tr>
-								{% endif %}
-								
-								{% if result.order2splitB > '0' %}
-								<tr>
-								  <th>Purchased Token used as fee</th>
-									<td>{{result.order2splitB}}</td>
-								</tr>
-								{% endif %}
-							</tbody>
-						</table>
-					</div>
-				</div>
+			<div id="container" class="container">
+				<table class="table table-hover table-striped table-responsive">
+					<tbody>
+						<tr>
+						  <th>Order Hash</th>
+							<td>{{result.order2hash}}</td>
+						</tr>
+						
+						<tr>
+						  <th>Amount Traded</th>
+							<td>{{result.order2amount}}</td>
+						</tr>
+						
+						<tr>
+						  <th>Amount Received</th>
+							<td>{{result.order2nextamount}}</td>
+						</tr>
+						
+						<tr>
+						  <th>Trade Rate</th>
+							<td>1 : {{result.rate2}}</td>
+						</tr>
+						
+						{% if result.order2lrcFeeState > '0' %}
+						<tr>
+						  <th>Lrc Paid as Fee</th>
+							<td>{{result.order2lrcFeeState}}</td>
+						</tr>
+						{% endif %}
+						
+						{% if result.order2lrcReward > '0' %}
+						<tr>
+						  <th>Lrc Reward Miner</th>
+							<td>{{result.order2lrcReward}}</td>
+						</tr>
+						{% endif %}
+						
+						{% if result.order2splitS > '0' %}
+						<tr>
+						  <th>Sold Token used as fee</th>
+							<td>{{result.order2splitS}}</td>
+						</tr>
+						{% endif %}
+						
+						{% if result.order2splitB > '0' %}
+						<tr>
+						  <th>Purchased Token used as fee</th>
+							<td>{{result.order2splitB}}</td>
+						</tr>
+						{% endif %}
+					</tbody>
+				</table>
 		  </div>
-		  </div>
+		</div>
+		  
 			  <div class="tab-pane" id="order3" role="tabpanel" aria-labelledby="order3-tab">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<table class="table table-hover table-striped">
-								<tbody>
-									<tr>
-									  <th>Order Hash</th>
-										<td>{{result.order3hash}}</td>
-									</tr>
-									<tr>
-									  <th>Amount Traded</th>
-										<td>{{result.order3amount}}</td>
-									</tr>
-									
-									<tr>
-									  <th>Amount Received</th>
-										<td>{{result.order3nextamount}}</td>
-									</tr>
-									
-									<tr>
-									  <th>Trade Rate</th>
-										<td>1 : {{result.rate3}}</td>
-									</tr>
-										
-									{% if result.order3lrcFeeState > '0' %}
-									<tr>
-									  <th>Lrc Paid as Fee</th>
-										<td>{{result.order31lrcFeeState}}</td>
-									</tr>
-									{% endif %}
-									
-									{% if result.order3lrcReward > '0' %}
-									<tr>
-									  <th>Lrc Reward</th>
-										<td>{{result.order3lrcReward}}</td>
-									</tr>
-									{% endif %}
-									
-									{% if result.order3splitS > '0' %}
-									<tr>
-									  <th>Sold Token used as fee</th>
-										<td>{{result.order3splitS}}</td>
-									</tr>
-									{% endif %}
-									
-									{% if result.order3splitB > '0' %}
-									<tr>
-									  <th>Purchased Token used as fee</th>
-										<td>{{result.order3splitB}}</td>
-									</tr>
-									{% endif %}
-									
-								</tbody>
-							</table>
-						</div>
-					</div>
+				<div id="container" class="container">
+					<table class="table table-hover table-striped table-responsive">
+						<tbody>
+							<tr>
+							  <th>Order Hash</th>
+								<td>{{result.order3hash}}</td>
+							</tr>
+							<tr>
+							  <th>Amount Traded</th>
+								<td>{{result.order3amount}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Amount Received</th>
+								<td>{{result.order3nextamount}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Trade Rate</th>
+								<td>1 : {{result.rate3}}</td>
+							</tr>
+								
+							{% if result.order3lrcFeeState > '0' %}
+							<tr>
+							  <th>Lrc Paid as Fee</th>
+								<td>{{result.order31lrcFeeState}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order3lrcReward > '0' %}
+							<tr>
+							  <th>Lrc Reward</th>
+								<td>{{result.order3lrcReward}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order3splitS > '0' %}
+							<tr>
+							  <th>Sold Token used as fee</th>
+								<td>{{result.order3splitS}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order3splitB > '0' %}
+							<tr>
+							  <th>Purchased Token used as fee</th>
+								<td>{{result.order3splitB}}</td>
+							</tr>
+							{% endif %}
+							
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script src = {% static "js/jquery-3.3.1.js" %}> 
-	</script>
+	</div>
 	
-	<script src={% static "js/bootstrap.js" %}>
-	</script>
-	
+	<script src = {% static "js/jquery-3.3.1.js" %}></script>
+	<script src={% static "js/bootstrap.js" %}></script>
 	<script>
 	  $(function () {
 		$('#myTab li:last-child a').tab('show')

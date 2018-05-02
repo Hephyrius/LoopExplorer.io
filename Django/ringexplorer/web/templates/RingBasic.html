@@ -106,18 +106,18 @@
 						
 						<tr>
 						  <th>Total Token1 Received</th>
-							<td>{{result.token1Fees}}</td>
+							<td>{{result.order1splitS}}</td>
 						</tr>
 						
 						<tr>
 						  <th>Total Token2 Received</th>
-							<td>{{result.token2Fees}}</td>
+							<td>{{result.order2splitS}}</td>
 						</tr>
 						{% if result.ringsize >= "3" %}
 						
 						<tr>
 						  <th>Total Token3 Received</th>
-							<td>0</td>
+							<td>{{result.order3splitS}}</td>
 						</tr>
 						
 						{%endif%}
@@ -130,24 +130,35 @@
 				<div id="container" class="container">
 					<table class="table table-hover table-striped table-responsive">
 						<tbody>
+						
 							<tr>
 							  <th>Order Hash</th>
 								<td>{{result.order1hash}}</td>
 							</tr>
 							
 							<tr>
+							  <th>Order Owner</th>
+								<td>{{result.order1owner}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Token Traded</th>
+								<td>{{result.order1token}}</td>
+							</tr>
+							
+							<tr>
 							  <th>Amount Traded</th>
-								<td>{{result.order1amount}}</td>
+								<td>{{result.order1fillamount}}</td>
 							</tr>
 							
 							<tr>
 							  <th>Amount Received</th>
-								<td>{{result.order1nextamount}}</td>
+								<td>{{result.order2fillamount}}</td>
 							</tr>
 							
 							<tr>
 							  <th>Trade Rate</th>
-								<td>1 : {{result.rate1}}</td>
+								<td>{{result.rate}}</td>
 							</tr>
 							
 							{% if result.order1lrcFeeState > '0' %}
@@ -171,13 +182,6 @@
 							</tr>
 							{% endif %}
 							
-							{% if result.order1splitB > '0' %}
-							<tr>
-							  <th>Purchased Token used as fee</th>
-								<td>{{result.order1splitB}}</td>
-							</tr>
-							{% endif %}
-							
 						</tbody>
 					</table>
 				</div>
@@ -187,54 +191,59 @@
 			<div id="container" class="container">
 				<table class="table table-hover table-striped table-responsive">
 					<tbody>
-						<tr>
-						  <th>Order Hash</th>
-							<td>{{result.order2hash}}</td>
-						</tr>
 						
-						<tr>
-						  <th>Amount Traded</th>
-							<td>{{result.order2amount}}</td>
-						</tr>
-						
-						<tr>
-						  <th>Amount Received</th>
-							<td>{{result.order2nextamount}}</td>
-						</tr>
-						
-						<tr>
-						  <th>Trade Rate</th>
-							<td>1 : {{result.rate2}}</td>
-						</tr>
-						
-						{% if result.order2lrcFeeState > '0' %}
-						<tr>
-						  <th>Lrc Paid as Fee</th>
-							<td>{{result.order2lrcFeeState}}</td>
-						</tr>
-						{% endif %}
-						
-						{% if result.order2lrcReward > '0' %}
-						<tr>
-						  <th>Lrc Reward Miner</th>
-							<td>{{result.order2lrcReward}}</td>
-						</tr>
-						{% endif %}
-						
-						{% if result.order2splitS > '0' %}
-						<tr>
-						  <th>Sold Token used as fee</th>
-							<td>{{result.order2splitS}}</td>
-						</tr>
-						{% endif %}
-						
-						{% if result.order2splitB > '0' %}
-						<tr>
-						  <th>Purchased Token used as fee</th>
-							<td>{{result.order2splitB}}</td>
-						</tr>
-						{% endif %}
-					</tbody>
+							<tr>
+							  <th>Order Hash</th>
+								<td>{{result.order2hash}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Order Owner</th>
+								<td>{{result.order2owner}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Token Traded</th>
+								<td>{{result.order2token}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Amount Traded</th>
+								<td>{{result.order2fillamount}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Amount Received</th>
+								<td>{{result.order1fillamount}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Trade Rate</th>
+								<td>{{result.rate}}</td>
+							</tr>
+							
+							{% if result.order2lrcFeeState > '0' %}
+							<tr>
+							  <th>Lrc Paid as Fee</th>
+								<td>{{result.order2lrcFeeState}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order2lrcReward > '0' %}
+							<tr>
+							  <th>Lrc Reward</th>
+								<td>{{result.order2lrcReward}}</td>
+							</tr>
+							{% endif %}
+							
+							{% if result.order2splitS > '0' %}
+							<tr>
+							  <th>Sold Token used as fee</th>
+								<td>{{result.order2splitS}}</td>
+							</tr>
+							{% endif %}
+							
+						</tbody>
 				</table>
 		  </div>
 		</div>
@@ -243,29 +252,41 @@
 				<div id="container" class="container">
 					<table class="table table-hover table-striped table-responsive">
 						<tbody>
+						
 							<tr>
 							  <th>Order Hash</th>
 								<td>{{result.order3hash}}</td>
 							</tr>
+							
+							<tr>
+							  <th>Order Owner</th>
+								<td>{{result.order3owner}}</td>
+							</tr>
+							
+							<tr>
+							  <th>Token Traded</th>
+								<td>{{result.order3token}}</td>
+							</tr>
+							
 							<tr>
 							  <th>Amount Traded</th>
-								<td>{{result.order3amount}}</td>
+								<td>{{result.order2fillamount}}</td>
 							</tr>
 							
 							<tr>
 							  <th>Amount Received</th>
-								<td>{{result.order3nextamount}}</td>
+								<td>{{result.order3fillamount}}</td>
 							</tr>
 							
 							<tr>
 							  <th>Trade Rate</th>
-								<td>1 : {{result.rate3}}</td>
+								<td>{{result.rate}}</td>
 							</tr>
-								
+							
 							{% if result.order3lrcFeeState > '0' %}
 							<tr>
 							  <th>Lrc Paid as Fee</th>
-								<td>{{result.order31lrcFeeState}}</td>
+								<td>{{result.order3lrcFeeState}}</td>
 							</tr>
 							{% endif %}
 							
@@ -280,13 +301,6 @@
 							<tr>
 							  <th>Sold Token used as fee</th>
 								<td>{{result.order3splitS}}</td>
-							</tr>
-							{% endif %}
-							
-							{% if result.order3splitB > '0' %}
-							<tr>
-							  <th>Purchased Token used as fee</th>
-								<td>{{result.order3splitB}}</td>
 							</tr>
 							{% endif %}
 							

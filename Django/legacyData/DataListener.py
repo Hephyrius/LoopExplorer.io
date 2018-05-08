@@ -32,7 +32,7 @@ while(True):
     
     
     #api ley for etherscan
-    api_key = "3YT45XBZMKGYDF8IDECEXN8V4M9FX59MH7"
+    api_key = "key"
     
     #loopringimpl deployment address
     loopringimpl_address = "0xb1170dE31c7f72aB62535862C97F5209E356991b"

@@ -4,7 +4,7 @@ Ring Explorer for the Ethereum implementation of the loopring protocol.
 
 Written using Bootstrap and Django.
 
-[Click here to see a live version](http://LoopExplorer.io:8000)
+~~[Click here to see a live version](http://LoopExplorer.io:8000)~~ - Offline Until Further Updated/Direction
 
 # Requirements
 
